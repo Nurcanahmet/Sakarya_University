@@ -1,0 +1,59 @@
+'*
+' * Project name:
+'     LED_Curtain (Simple 'Hello World' project)
+' * Copyright:
+'     (c) Mikroelektronika, 2009.
+' * Revision History:
+'     20071210:
+'       - initial release;
+' * Description:
+'     This is a simple 'Hello World' project. It turns on/off diodes connected to
+'     PORT0, PORT1, PORT2 and PORT3.
+' * Test configuration:
+'     MCU:             AT89S8253
+'                      http://www.atmel.com/dyn/resources/prod_documents/doc3286.pdf
+'     Dev.Board:       Easy8051 v6
+'                      http://www.mikroe.com/en/tools/easy8051-v6/
+'     Oscillator:      External Clock 10.0000 MHz
+'     Ext. Modules:    -
+'     SW:              mikroBasic PRO for 8051
+'                      http://www.mikroe.com/en/compilers/mikrobasic/8051/
+' * NOTES:
+'     - Turn ON the PORT LEDs.
+'     - On Easy8051 v6 LEDs are activated by logical zero.
+'
+
+program LED_Curtain
+
+dim counter as byte
+
+sub procedure Wait()
+  Delay_ms(100)
+end sub
+
+main:
+  P0 = 0xFF    ' turn OFF the P0 leds
+  P1 = 0xFF    ' turn OFF the P1 leds
+  P2 = 0xFF    ' turn OFF the P2 leds
+  P3 = 0xFF    ' turn OFF the P3 leds
+
+  while TRUE
+    for counter = 0 to 7
+      P0 = P0 or 1 << counter
+      P1 = P1 or 1 << counter
+      P2 = P2 or 1 << counter
+      P3 = P3 or 1 << counter
+      Wait()
+    next counter
+
+    counter = 0
+    while (counter < 8)
+      P0 = P0 and not(1 << counter)
+      P1 = P1 and not(1 << counter)
+      P2 = P2 and not(1 << counter)
+      P3 = P3 and not(1 << counter)
+      Wait()
+      Inc(counter)
+    wend
+  wend
+end.

@@ -1,0 +1,50 @@
+{*
+ * Project name:
+     PortExpander (Demonstration of the Port Expander library routines)
+ * Copyright:
+     (c) Mikroelektronika, 2009.
+ * Revision History:
+     20090601:
+       - initial release;
+ * Description:
+     This project is simple demonstration how to use Port Expander Library
+     functions to communicate with Port Expander.
+ * Test configuration:
+     MCU:             AT89S8253
+                      http://www.atmel.com/dyn/resources/prod_documents/doc3286.pdf
+     Dev.Board:       Easy8051 v6
+                      http://www.mikroe.com/en/tools/easy8051-v6/
+     Oscillator:      External Clock 10.0000 MHz
+     Ext. Modules:    -
+     SW:              mikroPascal PRO for 8051
+                      http://www.mikroe.com/en/compilers/mikropascal/8051/
+ * NOTES:
+     - Turn ON the PORT2 LEDs.
+ *}
+
+program Soft_SPI;
+
+var i : byte;
+
+// Port Expander module connections
+var SPExpanderRST : sbit at P3_7_bit;
+var SPExpanderCS  : sbit at P3_4_bit;
+// End Port Expander module connections
+
+
+  begin
+    i := 0;
+    SPI1_Init();                                // Initialize SPI1 module
+    Expander_Init(0);                           // Initialize Port Expander
+    Expander_Set_DirectionPortA(0, 0x00);       // Set Expander's PORTA to be output
+    Expander_Set_DirectionPortB(0,0xFF);        // Set Expander's PORTB to be input
+    Expander_Set_PullUpsPortB(0,0xFF);          // Set pull-ups to all of the Expander's PORTB pins
+
+    while TRUE do                               // Endless loop
+      begin
+        Expander_Write_PortA(0, i);             // Write i to expander's PORTA
+        Inc(i);
+        P2 := Not Expander_Read_PortB(0);       // Read expander's PORTB and write it to PORT0
+        Delay_ms(100);
+      end;
+  end.
