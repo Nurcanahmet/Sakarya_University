@@ -1,2 +1,2 @@
-# Sakarya_University
- Sakarya University Faculty of Computer and Information Sciences | Computer Engineering 2022-2026 Homeworks, projects, lecture notes and exam questions I did during my Sakarya University Computer Engineering undergraduate education.
+# Sakarya_Üniversitesi
+Sakarya Üniversitesi Bilgisayar ve Bilişim Bilimleri Fakültesi | Bilgisayar Mühendisliği 2022-2026 Sakarya Üniversitesi Bilgisayar Mühendisliği lisans eğitimim boyunca yaptığım ödevler, projeler, ders notları ve sınav soruları.
